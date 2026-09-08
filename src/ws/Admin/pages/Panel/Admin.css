@@ -1,0 +1,73 @@
+.admin-panel {
+	color: var(--text-primary);
+}
+
+.admin-form-section {
+	border: 1px solid var(--accent-primary);
+	margin-bottom: 1.5rem;
+	padding: 1.25rem;
+}
+
+.admin-form-section legend {
+	color: var(--accent-primary);
+	float: none;
+	font-size: 1.25rem;
+	font-weight: 700;
+	margin-bottom: 0.75rem;
+	width: auto;
+}
+
+.admin-section-header {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 0.75rem;
+}
+
+.admin-section-header legend {
+	margin-bottom: 0;
+}
+
+.admin-subheading {
+	font-size: 1.1rem;
+	margin: 1.5rem 0 0.5rem;
+}
+
+.admin-row-action {
+	align-self: flex-end;
+	padding-bottom: 1rem;
+}
+
+/* Añadir a Admin.css */
+.btn-icon-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  width: 100%;
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-icon-danger:hover {
+  background-color: #ef4444;
+  color: #fff;
+}
+
+.current-file-text {
+  display: block;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-top: 0.25rem;
+  word-break: break-all;
+}
+
+@media (max-width: 767px) {
+	.admin-row-action {
+		padding-bottom: 0;
+	}
+}

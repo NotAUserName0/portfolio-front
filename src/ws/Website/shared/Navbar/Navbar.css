@@ -1,0 +1,101 @@
+#menu {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+#menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+}
+
+.list-open {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+#menu ul.open {
+  max-height: 500px;
+  opacity: 1;
+}
+
+#menu ul.close {
+  max-height: 0;
+  opacity: 0;
+}
+
+@media (min-width: 769px) {
+  #menu ul {
+    display: flex;
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+  }
+}
+
+#menu a {
+  display: flex;
+  text-decoration: none;
+  text-align: center;
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: 4px;
+  width: 100%;
+  min-height: var(--navbar-height, 64px);
+  height: var(--navbar-height, 64px);
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#menu a.active {
+  background-color: var(--bg-surface-hover);
+  color: var(--accent-primary);
+}
+
+#menu a:hover {
+  background-color: var(--bg-surface-hover);
+  color: var(--accent-primary);
+}
+
+.btn-container {
+  display: inline-flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.btn-container .btn {
+  margin: 8px;
+}
+
+.btn-container .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  margin: 8px;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+.btn-container .btn:hover, .btn-container .btn:focus {
+  background-color: var(--accent-primary-hover);
+}
+
+.hide {
+  display: none !important;
+}
+
+.menu-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--navbar-height, 64px);
+  z-index: 1000;
+}

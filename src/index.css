@@ -1,0 +1,117 @@
+:root {
+  /* ========================================================================
+     OPCIÓN 1: TECH INDIGO (Moderna, estilo Vercel/Linear) - [ACTIVA POR DEFECTO]
+     ======================================================================== */
+  --bg-main: #0a0a0c;            /* Fondo principal de la página */
+  --bg-surface: #121216;         /* Fondo para cards, modales o secciones */
+  --bg-surface-hover: #18181f;   /* Hover en tarjetas/elementos interactivos */
+
+  --border-subtle: #27272a;      /* Bordes de cards, inputs y divisores */
+  --border-highlight: #3f3f46;   /* Bordes activos o al hacer focus */
+
+  --text-primary: #f4f4f5;       /* Títulos y textos destacados */
+  --text-secondary: #a1a1aa;     /* Párrafos, descripciones y fechas */
+  --text-muted: #71717a;         /* Placeholders, texto secundario sutil */
+
+  --accent-primary: #6366f1;     /* Color principal: botones CTA, links, focus */
+  --accent-primary-hover: #4f46e5;
+  --accent-secondary: #38bdf8;   /* Color secundario: badges, tags, gradientes */
+
+  --accent-glow: rgba(99, 102, 241, 0.15); /* Sombras con brillo suave */
+}
+
+/* ==========================================================================
+   OPCIÓN 2: CLEAN EMERALD (Fresca, moderna, estilo ingeniería/terminal)
+   Para probarla, copia estas variables dentro de :root o agrega data-theme="emerald"
+   ========================================================================== */
+[data-theme="emerald"] {
+  --bg-main: #090d0b;
+  --bg-surface: #111a15;
+  --bg-surface-hover: #16241d;
+
+  --border-subtle: #1e3126;
+  --border-highlight: #2d4838;
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --accent-primary: #10b981;
+  --accent-primary-hover: #059669;
+  --accent-secondary: #6ee7b7;
+
+  --accent-glow: rgba(16, 185, 129, 0.15);
+}
+
+/* ==========================================================================
+   OPCIÓN 3: SUNSET GLOW (Cálida, creativa, dinámica)
+   Para probarla, copia estas variables dentro de :root o agrega data-theme="sunset"
+   ========================================================================== */
+[data-theme="sunset"] {
+  --bg-main: #0b090a;
+  --bg-surface: #171216;
+  --bg-surface-hover: #221a21;
+
+  --border-subtle: #2d202b;
+  --border-highlight: #433041;
+
+  --text-primary: #fdf8f6;
+  --text-secondary: #a8a29e;
+  --text-muted: #78716c;
+
+  --accent-primary: #f97316;
+  --accent-primary-hover: #ea580c;
+  --accent-secondary: #ec4899;
+
+  --accent-glow: rgba(249, 115, 22, 0.15);
+}
+
+/* ==========================================================================
+   OPCIÓN 4: PURE CONTRAST (Minimalista, sobria, elegante)
+   Para probarla, copia estas variables dentro de :root o agrega data-theme="pure"
+   ========================================================================== */
+[data-theme="pure"] {
+  --bg-main: #050505;
+  --bg-surface: #121212;
+  --bg-surface-hover: #1c1c1c;
+
+  --border-subtle: #262626;
+  --border-highlight: #404040;
+
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #52525b;
+
+  --accent-primary: #ffffff;
+  --accent-primary-hover: #e4e4e7;
+  --accent-secondary: #a1a1aa;
+
+  --accent-glow: rgba(255, 255, 255, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;   /* Firefox */
+  -ms-overflow-style: none; /* Edge/IE legacy */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge Chromium */
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+}
+
+@media (min-width: 769px) {
+  body {
+    padding-top: var(--navbar-height, 64px);
+  }
+
+  #profile,
+  #proyects,
+  #social {
+    scroll-margin-top: calc(var(--navbar-height, 64px) + 16px);
+  }
+}

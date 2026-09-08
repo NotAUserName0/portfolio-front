@@ -1,0 +1,15 @@
+.title-subsection {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--accent-primary);
+    text-align: center;
+}
+
+.title-subsection + hr {
+    border: 3px solid var(--accent-primary);
+    margin-top: 1rem;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
