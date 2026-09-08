@@ -15,6 +15,7 @@
    - [Opción B: Compilación para Producción (Build)](#opción-b-compilación-para-producción-build)
    - [Opción C: Despliegue con Docker (Nginx Multi-Stage)](#opción-c-despliegue-con-docker-nginx-multi-stage)
    - [Opción D: Despliegue con Docker Compose (Fullstack)](#opción-d-despliegue-con-docker-compose-fullstack)
+   - [⚠️ Advertencias Críticas de Despliegue](#️-advertencias-críticas-de-despliegue)
 5. [🏛️ Arquitectura y Módulos de la Aplicación](#-arquitectura-y-módulos-de-la-aplicación)
    - [1. Módulo Público (Landing del Portafolio)](#1-módulo-público-landing-del-portafolio)
    - [2. Módulo Administrativo (Panel CMS)](#2-módulo-administrativo-panel-cms)
@@ -76,7 +77,7 @@ Crea o edita el archivo `.env` en la raíz de `front/`:
 
 ```env
 # URL de la API en producción
-VITE_API_URL=http://72.60.30.86:8081
+VITE_API_URL=http://<IP_O_DOMINIO_VPS>:8081
 
 # URL de la API en entorno local de desarrollo
 VITE_DEV_URL=http://localhost:8081
@@ -160,6 +161,31 @@ docker compose up -d --build
 * Frontend disponible en: [http://localhost:3000](http://localhost:3000)
 * Backend disponible en: [http://localhost:8081](http://localhost:8081)
 * Base de datos MariaDB expuesta en el host: `localhost:3307`
+
+---
+
+### ⚠️ Advertencias Críticas de Despliegue
+
+> [!WARNING]
+> **1. Variables de Entorno en Vite: Compilación (*Build-Time*) vs Ejecución (*Runtime*):**
+> * A diferencia del backend donde las variables de entorno se leen al arrancar, en **Vite y React las variables `import.meta.env` se reemplazan e incrustan como cadenas fijas dentro del código JavaScript durante la compilación (`npm run build`)**.
+> * Si cambias la URL de la API en el archivo `.env` después de haber compilado, **el frontend no tomará el cambio**. Es obligatorio reconstruir la imagen Docker (`docker compose up -d --build`).
+> * En pipelines CI/CD (como Jenkins), el archivo `.env` de producción debe inyectarse **antes** de que Docker ejecute `npm run build`.
+
+> [!IMPORTANT]
+> **2. Enrutamiento SPA en Nginx (`try_files`):**
+> * Al desplegar una Single Page Application con React Router, las rutas como `/admin` o `/login` no existen físicamente en el disco del servidor.
+> * En [nginx.conf](nginx.conf) es **imprescindible** la directiva `try_files $uri $uri/ /index.html;`. Sin ella, cualquier recarga de página (F5) en una ruta que no sea la raíz devolverá un error `404 Not Found` de Nginx.
+
+> [!CAUTION]
+> **3. Seguridad en CI/CD (No exponer IPs o secretos en Jenkinsfile):**
+> * Evita escribir IPs fijas, dominios o credenciales directamente dentro del [Jenkinsfile](Jenkinsfile) que se sube al repositorio público.
+> * Utiliza variables de entorno de Jenkins (`environment { API_URL = credentials('frontend-api-url') }`) o argumentos parametrizados.
+
+> [!TIP]
+> **4. Formato y Origen de URLs de Imágenes (`formatImageUrl`):**
+> * Las imágenes que provienen del backend deben prefijarse con la URL base del servidor (`API_URL` o `DEV_URL`) y la ruta `upload/`.
+> * El helper [src/helpers/imageFormatter.ts](src/helpers/imageFormatter.ts) sanitiza los protocolos maliciosos (`javascript:`, etc.) y normaliza la ruta completa evitando errores 403.
 
 ---
 

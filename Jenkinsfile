@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        PRIVATE_VPS_URL = credentials('private_vps_url')
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -14,7 +18,7 @@ pipeline {
                 echo 'Injecting production environment variables...'
                 sh '''
                     cat <<EOF > .env
-VITE_API_URL=http://72.60.30.86:8081
+VITE_API_URL=${PRIVATE_VPS_URL}:8081
 VITE_DEV_URL=http://localhost:8081
 VITE_IS_PRODUCTION=true
 EOF
